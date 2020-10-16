@@ -11,8 +11,48 @@ public class BresenhamLineDrawer implements LineDrawer {
     public BresenhamLineDrawer(PixelDrawer pixelDrawer) {
         this.pixelDrawer = pixelDrawer;
     }
-
     @Override
+    public void drawLine(int x1, int y1, int x2, int y2) {
+
+        if(Math.abs(x2 - x1) > Math.abs(y2 - y1)) {
+            if(x1 > x2) {
+                int temp = x1; x1 = x2; x2 = temp;
+                temp = y1; y1 = y2; y2 = temp;
+            }
+            int dx = x2 - x1, dy = y2 - y1, d = 2*dy - dx;
+            int k = dy > 0 ? 1 : -1; // костыль для 2 и 4 четвертей
+
+            for (int x = x1, y = y1; x <= x2; x++) {
+                pixelDrawer.setPixel(x, y, Color.black);
+                if (d >= 0) {
+                    d += 2 * dy * k - 2 * dx;
+                    y += k;
+                } else {
+                    d += 2 * dy * k;
+                }
+            }
+        }
+        else {
+            if(y1 > y2) {
+                int temp = y1; y1 = y2; y2 = temp;
+                temp = x1; x1 = x2; x2 = temp;
+            }
+
+            int dx = x2 - x1, dy = y2 - y1, d = 2*dx - dy;
+            int k = dx > 0 ? 1 : -1; // костыль для 2 и 4 четвертей
+
+            for (int x = x1, y = y1; y <= y2; y++) {
+                pixelDrawer.setPixel(x, y, Color.black);
+                if (d >= 0) {
+                    d += 2 * dx * k - 2 * dy;
+                    x += k;
+                } else {
+                    d += 2 * dx * k;
+                }
+            }
+        }
+    }
+   /* @Override
     public void drawLine(int x1, int y1, int x2, int y2) {
         int x, y, dx, dy, incx, incy, pdx, pdy, es, el, err;
 
@@ -65,5 +105,5 @@ public class BresenhamLineDrawer implements LineDrawer {
     private int sign(int x) {
         return Integer.compare(x, 0);
         //возвращает 0, если аргумент (x) равен нулю; -1, если x < 0 и 1, если x > 0.
-    }
+    }*/
 }

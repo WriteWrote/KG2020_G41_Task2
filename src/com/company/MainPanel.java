@@ -32,11 +32,6 @@ public class MainPanel extends JPanel implements MouseMotionListener {
         PixelDrawer pd = new GraphicsPixelDrawer(bi_g);
         LineDrawer ld = new DDALineDrawer(pd);
 
-        BresenhamLineDrawer bresenhamLineDrawer = new BresenhamLineDrawer(pd);
-        //bresenhamLineDrawer.drawLine(50, 80, 100, 300);
-        //bresenhamLineDrawer.drawLine(50, 85, 70, 400);
-        //bresenhamLineDrawer.drawLine(400, 50, 50, 70);
-
         drawTestSnowFlakes(pd);
 
         g.drawImage(bi, 0, 0, null);
@@ -47,7 +42,7 @@ public class MainPanel extends JPanel implements MouseMotionListener {
         for (int i = 100; i < getWidth() - 150; i += 200) {
             DrawUtils.drawSnowFlake(new DDALineDrawer(pixelDrawer), i, getHeight() / 2, 100, 13);
             DrawUtils.drawSnowFlake(new BresenhamLineDrawer(pixelDrawer), i, getHeight() / 4, 100, 13);
-            //DrawUtils.drawSnowFlake(new WuLineDrawer(pixelDrawer), i, 3*getHeight() / 4, 100, 13);
+            DrawUtils.drawSnowFlake(new WuLineDrawer(pixelDrawer), i, 3 * getHeight() / 4, 100, 13);
         }
     }
 

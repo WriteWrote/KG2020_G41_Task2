@@ -30,19 +30,24 @@ public class MainPanel extends JPanel implements MouseMotionListener {
         bi_g.setColor(Color.black);
 
         PixelDrawer pd = new GraphicsPixelDrawer(bi_g);
-        LineDrawer ld = new DDALineDrawer(pd);
+        BresenhamLineDrawer ld = new BresenhamLineDrawer(pd);
 
-        drawTestSnowFlakes(pd);
-
+        //drawTestSnowFlakes(pd);
+        ld.drawBresenhamCircle(50, 50, 100);
+        ld.drawLine(50, 50,250, 50);
+        ld.drawLine(50, 50, 50, 250);
         g.drawImage(bi, 0, 0, null);
         bi_g.dispose();
     }
 
     private void drawTestSnowFlakes(PixelDrawer pixelDrawer) {
         for (int i = 100; i < getWidth() - 150; i += 200) {
-            DrawUtils.drawSnowFlake(new DDALineDrawer(pixelDrawer), i, getHeight() / 2, 100, 13);
-            DrawUtils.drawSnowFlake(new BresenhamLineDrawer(pixelDrawer), i, getHeight() / 4, 100, 13);
-            DrawUtils.drawSnowFlake(new WuLineDrawer(pixelDrawer), i, 3 * getHeight() / 4, 100, 13);
+            DrawUtils.drawColouredSnowFlake(new DDALineDrawer(pixelDrawer), i, getHeight() / 2, 100, 13, Color.MAGENTA);
+            DrawUtils.drawColouredSnowFlake(new BresenhamLineDrawer(pixelDrawer), i, getHeight() / 4, 100, 13, Color.GREEN);
+            DrawUtils.drawColouredSnowFlake(new WuLineDrawer(pixelDrawer), i, 3 * getHeight() / 4, 100, 13, Color.ORANGE);
+            //DrawUtils.drawSnowFlake(new DDALineDrawer(pixelDrawer), i, getHeight() / 2, 100, 13);
+            //DrawUtils.drawSnowFlake(new BresenhamLineDrawer(pixelDrawer), i, getHeight() / 4, 100, 13);
+            //DrawUtils.drawSnowFlake(new WuLineDrawer(pixelDrawer), i, 3 * getHeight() / 4, 100, 13);
         }
     }
 

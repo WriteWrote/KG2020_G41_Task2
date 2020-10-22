@@ -4,6 +4,7 @@ import com.company.LineDrawer;
 import com.company.PixelDrawer;
 
 import java.awt.*;
+import java.util.Set;
 
 public class WuLineDrawer implements LineDrawer {
     private PixelDrawer pixelDrawer;
@@ -30,13 +31,17 @@ public class WuLineDrawer implements LineDrawer {
             int error = dy > 0 ? 1 : -1;
 
             for (int x = x1, y = y1; x <= x2; x++) {
-                float _d = -1F * error / (dy + dx) / 1.15F;
-                if (error >= 0) {
-                    pixelDrawer.setPixel(x, y, new Color((int) (1F / 2 - _d)));
-                    pixelDrawer.setPixel(x, y + 1, new Color((int) (1F / 2 + _d)));
+                //float _d = -1F * error / (dy + dx) / 1.15F;
+                pixelDrawer.setPixel(x, y, new Color(0, 0, 0, dy / dx));
+                //pixelDrawer.setPixel(x, y, Color.BLACK);
+                if (error > 0) {
+                    pixelDrawer.setPixel(x, y + 1, new Color(0, 0, 0, 1 - dy / dx));
+                    //pixelDrawer.setPixel(x, y, SetColor((int) (1F / 2 - _d)));
+                    //pixelDrawer.setPixel(x, y + 1, SetColor((int) (1F / 2 + _d)));
                 } else {
-                    pixelDrawer.setPixel(x, y, new Color((int) (1F / 2 + d)));
-                    pixelDrawer.setPixel(x, y - 1, new Color((int) (1F / 2 - d)));
+                    pixelDrawer.setPixel(x, y - 1, new Color(0, 0, 0, 1 - dy / dx));
+                    //pixelDrawer.setPixel(x, y, SetColor((int) (1F / 2 + d)));
+                    //  pixelDrawer.setPixel(x, y - 1, SetColor((int) (1F / 2 - d)));
                 }
 
                 if (d >= 0) {
@@ -63,12 +68,16 @@ public class WuLineDrawer implements LineDrawer {
 
             for (int x = x1, y = y1; y <= y2; y++) {
                 float _d = -1F * error / (dy + dx) / 1.15F;
-                if (error >= 0) {
-                    pixelDrawer.setPixel(x, y, new Color((int) (1F / 2 - _d)));
-                    pixelDrawer.setPixel(x + 1, y, new Color((int) (1F / 2 + _d)));
+                pixelDrawer.setPixel(x, y, new Color(0, 0, 0, dx / dy));
+                //pixelDrawer.setPixel(x, y, Color.BLACK);
+                if (error > 0) {
+                    pixelDrawer.setPixel(x + 1, y, new Color(1 - dx / dy));
+                    //    pixelDrawer.setPixel(x, y, SetColor((int) (1F / 2 - _d)));
+                    //  pixelDrawer.setPixel(x + 1, y, SetColor((int) (1F / 2 + _d)));
                 } else {
-                    pixelDrawer.setPixel(x, y, new Color((int) (1F / 2 + d)));
-                    pixelDrawer.setPixel(x - 1, y, new Color((int) (1F / 2 - d)));
+                    pixelDrawer.setPixel(x - 1, y, new Color(0, 0, 0, 1 - dx / dy));
+                    //      pixelDrawer.setPixel(x, y, SetColor((int) (1F / 2 + d)));
+                    //pixelDrawer.setPixel(x - 1, y, SetColor((int) (1F / 2 - d)));
                 }
 
                 if (d >= 0) {
@@ -80,5 +89,18 @@ public class WuLineDrawer implements LineDrawer {
             }
 
         }
+    }
+
+    @Override
+    public void drawColorLine(int x1, int y1, int x2, int y2, Color color) {
+
+    }
+
+    private Color SetColor(float t) {
+        int c = (int) (255 * t);
+        //Color res = new Color(Color.HSBtoRGB(c,c,c));
+        Color res = Color.getHSBColor(c, c, c);
+        //Color res = Color.FromArgb(c, c, c);
+        return res;
     }
 }

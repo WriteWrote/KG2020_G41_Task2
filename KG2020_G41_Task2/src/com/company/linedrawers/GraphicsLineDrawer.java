@@ -12,7 +12,12 @@ public class GraphicsLineDrawer implements LineDrawer {
     }
 
     @Override
-    public void drawLine(int x1, int y1, int x2, int y2, Color color) {
+    public void drawLine(int x1, int y1, int x2, int y2) {
+        g.drawLine(x1, y1, x2, y2);
+    }
+
+    @Override
+    public void drawColorLine(int x1, int y1, int x2, int y2, Color color) {
         g.setColor(color);
         g.drawLine(x1, y1, x2, y2);
     }

@@ -32,29 +32,28 @@ public class MainPanel extends JPanel implements MouseMotionListener {
         PixelDrawer pd = new GraphicsPixelDrawer(bi_g);
         BresenhamLineDrawer ld = new BresenhamLineDrawer(pd);
 
-        drawTestSnowFlakes(pd);
-        ld.drawBresenhamCircle(50, 430, 70);
-        ld.draw_ellipse(350,500,100, 70);
-
-        ld.fillBresenhamCircle();
-        ld.fillBresenhamEllipse();
-
+        //drawTestSnowFlakes(pd);
+        ld.drawBresenhamCircle(50, 50, 100);
+        ld.drawLine(50, 50,250, 50);
+        ld.drawLine(50, 50, 50, 250);
         g.drawImage(bi, 0, 0, null);
         bi_g.dispose();
     }
 
     private void drawTestSnowFlakes(PixelDrawer pixelDrawer) {
-        DrawUtils.drawSnowFlake(new DDALineDrawer(pixelDrawer), 100, 100, 100, 13, Color.MAGENTA);
-        DrawUtils.drawSnowFlake(new BresenhamLineDrawer(pixelDrawer), 300, 100, 100, 13, Color.GREEN);
-        DrawUtils.drawSnowFlake(new WuLineDrawer(pixelDrawer), 500, 100, 100, 13, Color.ORANGE);
-        DrawUtils.drawSnowFlake(new DDALineDrawer(pixelDrawer), 100, 300, 100, 13, Color.BLACK);
-        DrawUtils.drawSnowFlake(new BresenhamLineDrawer(pixelDrawer), 300, 300, 100, 13, Color.BLACK);
-        DrawUtils.drawSnowFlake(new WuLineDrawer(pixelDrawer), 500, 300, 100, 13, Color.BLACK);
+        for (int i = 100; i < getWidth() - 150; i += 200) {
+            DrawUtils.drawColouredSnowFlake(new DDALineDrawer(pixelDrawer), i, getHeight() / 2, 100, 13, Color.MAGENTA);
+            DrawUtils.drawColouredSnowFlake(new BresenhamLineDrawer(pixelDrawer), i, getHeight() / 4, 100, 13, Color.GREEN);
+            DrawUtils.drawColouredSnowFlake(new WuLineDrawer(pixelDrawer), i, 3 * getHeight() / 4, 100, 13, Color.ORANGE);
+            //DrawUtils.drawSnowFlake(new DDALineDrawer(pixelDrawer), i, getHeight() / 2, 100, 13);
+            //DrawUtils.drawSnowFlake(new BresenhamLineDrawer(pixelDrawer), i, getHeight() / 4, 100, 13);
+            //DrawUtils.drawSnowFlake(new WuLineDrawer(pixelDrawer), i, 3 * getHeight() / 4, 100, 13);
+        }
     }
 
     private void drawAll(LineDrawer ld) {
-        DrawUtils.drawSnowFlake(ld, getWidth() / 2, getHeight() / 2, 100, 13, Color.BLACK);
-        ld.drawLine(getWidth() / 2, getHeight() / 2, position.x, position.y, Color.BLACK);
+        DrawUtils.drawSnowFlake(ld, getWidth() / 2, getHeight() / 2, 100, 13);
+        ld.drawLine(getWidth() / 2, getHeight() / 2, position.x, position.y);
     }
 
     @Override

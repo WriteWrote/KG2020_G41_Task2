@@ -46,7 +46,7 @@ public class MainPanel extends JPanel implements MouseMotionListener {
     private void drawTestSnowFlakes(PixelDrawer pixelDrawer) {
         DrawUtils.drawSnowFlake(new DDALineDrawer(pixelDrawer), 100, 100, 100, 13, Color.MAGENTA);
         DrawUtils.drawSnowFlake(new BresenhamLineDrawer(pixelDrawer), 300, 100, 100, 13, Color.GREEN);
-        DrawUtils.drawSnowFlake(new WuLineDrawer(pixelDrawer), 500, 100, 100, 13, Color.ORANGE);
+        DrawUtils.drawSnowFlake(new WuLineDrawer(pixelDrawer), 500, 100, 100, 13, Color.RED);
         DrawUtils.drawSnowFlake(new DDALineDrawer(pixelDrawer), 100, 300, 100, 13, Color.BLACK);
         DrawUtils.drawSnowFlake(new BresenhamLineDrawer(pixelDrawer), 300, 300, 100, 13, Color.BLACK);
         DrawUtils.drawSnowFlake(new WuLineDrawer(pixelDrawer), 500, 300, 100, 13, Color.BLACK);

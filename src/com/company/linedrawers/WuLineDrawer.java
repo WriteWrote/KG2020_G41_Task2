@@ -38,14 +38,14 @@ public class WuLineDrawer implements LineDrawer {
         double realY = y1;
         if (isVertical) {
             for (int x = x1; x <= x2; x++) {
-                setColouredPixel((int) (realY), x, gradient(realY));
-                setColouredPixel((int) (realY) + 1, x, 1 - gradient(realY));
+                setColouredPixel((int) (realY), x, gradient(realY), color);
+                setColouredPixel((int) (realY) + 1, x, 1 - gradient(realY), color);
                 realY += gr;
             }
         } else {
             for (int x = x1; x <= x2; x++) {
-                setColouredPixel(x, (int) (realY) + 1, 1 - gradient(realY));
-                setColouredPixel(x, (int) (realY), gradient(realY));
+                setColouredPixel(x, (int) (realY) + 1, 1 - gradient(realY), color);
+                setColouredPixel(x, (int) (realY), gradient(realY), color);
                 realY += gr;
             }
         }
@@ -57,7 +57,8 @@ public class WuLineDrawer implements LineDrawer {
         return f_x - pixel_f_x - 1;
     }
 
-    private void setColouredPixel(int x, int y, double opacity) {
-        pixelDrawer.setPixel(x, y, new Color(0, 0, 0, (int) (255 * (1 - opacity))));
+    private void setColouredPixel(int x, int y, double opacity, Color color) {
+        pixelDrawer.setPixel(x, y, new Color(color.getRed(), color.getGreen(), color.getBlue(),
+                (int) (255 * (1 - opacity))));
     }
 }

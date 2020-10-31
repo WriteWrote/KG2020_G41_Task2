@@ -33,8 +33,9 @@ public class MainPanel extends JPanel implements MouseMotionListener {
         BresenhamLineDrawer ld = new BresenhamLineDrawer(pd);
 
         drawTestSnowFlakes(pd);
-        ld.drawBresenhamCircle(50, 430, 70);
-        ld.draw_ellipse(350,500,100, 70);
+        ld.drawBresenhamCircle(50, 430, 70, Color.BLACK);
+        ld.drawEllipse(350,500,100, 70, Color.MAGENTA);
+        ld.drawEllipse(550, 500, 50, 100, Color.BLACK);
 
         ld.fillBresenhamCircle();
         ld.fillBresenhamEllipse();
@@ -52,8 +53,8 @@ public class MainPanel extends JPanel implements MouseMotionListener {
         DrawUtils.drawSnowFlake(new WuLineDrawer(pixelDrawer), 500, 300, 100, 13, Color.BLACK);
     }
 
-    private void drawAll(LineDrawer ld) {
-        DrawUtils.drawSnowFlake(ld, getWidth() / 2, getHeight() / 2, 100, 13, Color.BLACK);
+    private void drawDraggingLine(LineDrawer ld) {
+        //DrawUtils.drawSnowFlake(ld, getWidth() / 2, getHeight() / 2, 100, 13, Color.BLACK);
         ld.drawLine(getWidth() / 2, getHeight() / 2, position.x, position.y, Color.BLACK);
     }
 

@@ -65,20 +65,20 @@ public class BresenhamLineDrawer implements LineDrawer {
         }
     }
 
-    public void drawBresenhamCircle(int x, int y, int radius) {
+    public void drawBresenhamCircle(int x, int y, int radius, Color color) {
         int _x = radius;
         //int _x = x;
         int _y = 0;
         int radiusError = 1 - _x;
         while (_x >= _y) {
-            pixelDrawer.setPixel(_x + x + radius, _y + y + radius, Color.BLACK);
-            pixelDrawer.setPixel(_y + x + radius, _x + y + radius, Color.BLACK);
-            pixelDrawer.setPixel(-_x + x + radius, _y + y + radius, Color.BLACK);
-            pixelDrawer.setPixel(-_y + x + radius, _x + y + radius, Color.BLACK);
-            pixelDrawer.setPixel(-_x + x + radius, -_y + y + radius, Color.BLACK);
-            pixelDrawer.setPixel(-_y + x + radius, -_x + y + radius, Color.BLACK);
-            pixelDrawer.setPixel(_x + x + radius, -_y + y + radius, Color.BLACK);
-            pixelDrawer.setPixel(_y + x + radius, -_x + y + radius, Color.BLACK);
+            pixelDrawer.setPixel(_x + x + radius, _y + y + radius, color);
+            pixelDrawer.setPixel(_y + x + radius, _x + y + radius, color);
+            pixelDrawer.setPixel(-_x + x + radius, _y + y + radius, color);
+            pixelDrawer.setPixel(-_y + x + radius, _x + y + radius, color);
+            pixelDrawer.setPixel(-_x + x + radius, -_y + y + radius, color);
+            pixelDrawer.setPixel(-_y + x + radius, -_x + y + radius, color);
+            pixelDrawer.setPixel(_x + x + radius, -_y + y + radius, color);
+            pixelDrawer.setPixel(_y + x + radius, -_x + y + radius, color);
             _y++;
             if (radiusError < 0) {
                 radiusError += 2 * _y + 1;
@@ -89,15 +89,7 @@ public class BresenhamLineDrawer implements LineDrawer {
         }
     }
 
-    private void pixel4(int x, int y, int _x, int _y, Color color) // Рисование пикселя для первого квадранта, и, симметрично, для остальных
-    {
-        pixelDrawer.setPixel(x + _x, y + _y, color);
-        pixelDrawer.setPixel(x + _x, y - _y, color);
-        pixelDrawer.setPixel(x - _x, y - _y, color);
-        pixelDrawer.setPixel(x - _x, y + _y, color);
-    }
-
-    public void draw_ellipse(int x, int y, int a, int b) {
+    public void drawEllipse(int x, int y, int a, int b, Color color) {
         int _x = 0;
         int _y = b;
         int a_sqr = a * a; // a^2, a - большая полуось
@@ -106,46 +98,46 @@ public class BresenhamLineDrawer implements LineDrawer {
                 a_sqr * ((2 * _y - 1) * (2 * _y - 1)) - 4 * a_sqr * b_sqr; // Функция координат точки (x+1, y-1/2)
         while (a_sqr * (2 * _y - 1) > 2 * b_sqr * (_x + 1)) // Первая часть дуги
         {
-            pixelDrawer.setPixel(x + _x, y + _y, Color.BLACK);
-            pixelDrawer.setPixel(x + _x, y - _y, Color.BLACK);
-            pixelDrawer.setPixel(x - _x, y - _y, Color.BLACK);
-            pixelDrawer.setPixel(x - _x, y + _y, Color.BLACK);
+            pixelDrawer.setPixel(x + _x, y + _y, color);
+            pixelDrawer.setPixel(x + _x, y - _y, color);
+            pixelDrawer.setPixel(x - _x, y - _y, color);
+            pixelDrawer.setPixel(x - _x, y + _y, color);
             if (delta < 0) // Переход по горизонтали
             {
-                _x++;
+                ++_x;
                 delta += 4 * b_sqr * (2 * _x + 3);
             } else // Переход по диагонали
             {
-                _x++;
+                ++_x;
                 delta = delta - 8 * a_sqr * (_y - 1) + 4 * b_sqr * (2 * _x + 3);
-                _y--;
+                --_y;
             }
         }
         delta = b_sqr * ((2 * _x + 1) * (2 * _x + 1)) +
                 4 * a_sqr * ((_y + 1) * (_y + 1)) - 4 * a_sqr * b_sqr; // Функция координат точки (x+1/2, y-1)
         while (_y + 1 != 0) // Вторая часть дуги, если не выполняется условие первого цикла, значит выполняется a^2(2y - 1) <= 2b^2(x + 1)
         {
-            pixelDrawer.setPixel(x + _x, y + _y, Color.BLACK);
-            pixelDrawer.setPixel(x + _x, y - _y, Color.BLACK);
-            pixelDrawer.setPixel(x - _x, y - _y, Color.BLACK);
-            pixelDrawer.setPixel(x - _x, y + _y, Color.BLACK);
+            pixelDrawer.setPixel(x + _x, y + _y, color);
+            pixelDrawer.setPixel(x + _x, y - _y, color);
+            pixelDrawer.setPixel(x - _x, y - _y, color);
+            pixelDrawer.setPixel(x - _x, y + _y, color);
             if (delta < 0) // Переход по вертикали
             {
-                _y--;
+                --_y;
                 delta += 4 * a_sqr * (2 * _y + 3);
             } else // Переход по диагонали
             {
-                _y--;
+                --_y;
                 delta = delta - 8 * b_sqr * (_x + 1) + 4 * a_sqr * (2 * _y + 3);
-                _x++;
+                ++_x;
             }
         }
     }
 
-    public void fillBresenhamCircle(){
+    public void fillBresenhamCircle() {
 
     }
-    public void fillBresenhamEllipse(){
 
+    public void fillBresenhamEllipse() {
     }
 }

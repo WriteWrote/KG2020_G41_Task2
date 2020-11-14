@@ -14,6 +14,8 @@ public class BresenhamLineDrawer implements LineDrawer {
 
     @Override
     public void drawLine(int x1, int y1, int x2, int y2, Color color) {
+        pixelDrawer.setPixel(x1, y1, color);
+        pixelDrawer.setPixel(x2, y2, color);
         boolean s = Math.abs(x2 - x1) > Math.abs(y2 - y1);
         if (s) {        // horizontal
             if (x1 > x2) {      //isInverted
@@ -26,12 +28,12 @@ public class BresenhamLineDrawer implements LineDrawer {
             }
             int dx = x2 - x1;
             int dy = y2 - y1;
-            int d = 2 * dy - dx;
             int error = dy > 0 ? 1 : -1;
+            int d = 2 * dy * error - dx;
 
             for (int x = x1, y = y1; x <= x2; x++) {
                 pixelDrawer.setPixel(x, y, color);
-                if (d >= 0) {
+                if (d > 0) {
                     d += 2 * dy * error - 2 * dx;
                     y += error;
                 } else {
@@ -49,13 +51,12 @@ public class BresenhamLineDrawer implements LineDrawer {
             }
             int dx = x2 - x1;
             int dy = y2 - y1;
-            int d = 2 * dy - dx;
             int error = dx > 0 ? 1 : -1;
-
+            int d = 2 * dx * error - dy;
 
             for (int x = x1, y = y1; y <= y2; y++) {
                 pixelDrawer.setPixel(x, y, color);
-                if (d >= 0) {
+                if (d > 0) {
                     d += 2 * dx * error - 2 * dy;
                     x += error;
                 } else {
@@ -65,7 +66,7 @@ public class BresenhamLineDrawer implements LineDrawer {
         }
     }
 
-    public void drawBresenhamCircle(int x, int y, int radius, Color color) {
+/*    public void drawBresenhamCircle(int x, int y, int radius, Color color) {
         int _x = radius;
         //int _x = x;
         int _y = 0;
@@ -88,8 +89,8 @@ public class BresenhamLineDrawer implements LineDrawer {
             }
         }
     }
-
-    public void drawEllipse(int x, int y, int a, int b, Color color) {
+*/
+    /*public void drawEllipse(int x, int y, int a, int b, Color color) {
         int _x = 0;
         int _y = b;
         int a_sqr = a * a; // a^2, a - большая полуось
@@ -132,12 +133,5 @@ public class BresenhamLineDrawer implements LineDrawer {
                 ++_x;
             }
         }
-    }
-
-    public void fillBresenhamCircle() {
-
-    }
-
-    public void fillBresenhamEllipse() {
-    }
+    }*/
 }

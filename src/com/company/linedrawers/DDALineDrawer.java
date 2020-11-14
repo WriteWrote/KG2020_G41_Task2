@@ -16,6 +16,8 @@ public class DDALineDrawer implements LineDrawer {
     public void drawLine(int x1, int y1, int x2, int y2, Color color) {
         double dx = x2 - x1;
         double dy = y2 - y1;
+        pd.setPixel(x1, y1, color);
+        pd.setPixel(x2, y2, color);
 
         if (Math.abs(dx) > Math.abs(dy)) {
             if (x1 > x2) {
@@ -28,7 +30,7 @@ public class DDALineDrawer implements LineDrawer {
                 y2 = tmp;
             }
             double k = dy / dx;
-            for (int j = x1; j <= x2; j++) {
+            for (int j = x1+1; j < x2; j++) {
                 double i = k * (j - x1) + y1;
                 pd.setPixel(j, (int) i, color);
             }
@@ -44,7 +46,7 @@ public class DDALineDrawer implements LineDrawer {
                 y2 = tmp;
             }
             double k = dx / dy;
-            for (int i = y1; i < y2; i++) {
+            for (int i = y1+1; i < y2; i++) {
                 double j = k * (i - y1) + x1;
                 pd.setPixel((int) j, i, color);
             }

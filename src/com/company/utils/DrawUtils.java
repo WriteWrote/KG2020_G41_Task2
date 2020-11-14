@@ -3,7 +3,6 @@ package com.company.utils;
 import com.company.LineDrawer;
 
 import java.awt.*;
-import java.util.LinkedList;
 
 /*
 не стоит стесняться пользовать именной пакет в программе. Это всегда хорошо

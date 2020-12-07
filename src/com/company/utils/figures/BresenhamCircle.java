@@ -7,7 +7,7 @@ import com.company.PixelDrawer;
 import java.awt.*;
 
 public class BresenhamCircle implements CircleDrawer {
-    PixelDrawer pixelDrawer;
+    private PixelDrawer pixelDrawer;
     private int x, y, radius;
     private Color color;
 

@@ -6,7 +6,7 @@ import com.company.PixelDrawer;
 import java.awt.*;
 
 public class BresenhamEllipse implements EllipseDrawer {
-    PixelDrawer pixelDrawer;
+    private PixelDrawer pixelDrawer;
     private int x, y, a, b;
     private Color color;
 

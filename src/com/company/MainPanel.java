@@ -5,6 +5,7 @@ import com.company.linedrawers.DDALineDrawer;
 import com.company.linedrawers.WuLineDrawer;
 import com.company.pixeldrawers.GraphicsPixelDrawer;
 import com.company.utils.DrawUtils;
+import com.company.utils.figures.Arc;
 import com.company.utils.figures.BresenhamCircle;
 import com.company.utils.figures.BresenhamEllipse;
 
@@ -33,6 +34,8 @@ public class MainPanel extends JPanel implements MouseMotionListener {
 
         PixelDrawer pd = new GraphicsPixelDrawer(bi_g);
         BresenhamLineDrawer ld = new BresenhamLineDrawer(pd);
+        bi_g.setColor(Color.black);
+        bi_g.fillOval(150, 150, 50, 50);
 
         drawTestSnowFlakes(pd);
         BresenhamCircle circle = new BresenhamCircle(pd, 50, 430, 70, Color.BLACK);
@@ -43,7 +46,14 @@ public class MainPanel extends JPanel implements MouseMotionListener {
         ellipse.setParams(550, 500, 50, 100, Color.BLACK);
         ellipse.drawEllipse();
 
-        //drawDraggingLine(new DDALineDrawer(pd));
+        Arc arc = new Arc(pd, 150, 600, 70, 0, Math.PI, Color.green);
+        arc.drawArc();
+        arc.setParams(350, 600, 100, 0, Math.PI * 2, Color.LIGHT_GRAY);
+        arc.drawArc();
+        arc.setParams(350, 600, 100, -Math.PI / 4, 2 * Math.PI / 3, Color.RED);
+        arc.drawArc();
+
+//        drawDraggingLine(new DDALineDrawer(pd));
         drawDraggingLine(new BresenhamLineDrawer(pd));
 
         g.drawImage(bi, 0, 0, null);

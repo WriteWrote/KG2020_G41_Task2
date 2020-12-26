@@ -14,24 +14,72 @@ public class BresenhamArcDrawer implements ArcDrawer {
 
     @Override
     public void drawArc(int x, int y, int width, int height, double startAngle, double sweepAngle, Color color) {
-        double deltaAngle = sweepAngle;
+        startAngle = startAngle - Math.PI / 2;
         PixelDrawer pixelDrawer = pd;
         int radius = width / 2;
+        /*
+        x = x + width/2;
+        y = y + height/2;
+        int _x = 0;
+        int _y = height / 2;
+        int a_sqr = width * width / 4; // a^2, a - большая полуось
+        int b_sqr = height * height / 4; // b^2, b - малая полуось
+        int delta = 4 * b_sqr * ((_x + 1) * (_x + 1)) +
+                a_sqr * ((2 * _y - 1) * (2 * _y - 1)) - 4 * a_sqr * b_sqr; // Функция координат точки (x+1, y-1/2)
+        while (a_sqr * (2 * _y - 1) > 2 * b_sqr * (_x + 1)) // Первая часть дуги
+        {
+            pixelDrawer.setPixel(x + _x, y + _y, color);
+            pixelDrawer.setPixel(x + _x, y - _y, color);
+            pixelDrawer.setPixel(x - _x, y - _y, color);
+            pixelDrawer.setPixel(x - _x, y + _y, color);
+            if (delta < 0) // Переход по горизонтали
+            {
+                ++_x;
+                delta += 4 * b_sqr * (2 * _x + 3);
+            } else // Переход по диагонали
+            {
+                ++_x;
+                delta = delta - 8 * a_sqr * (_y - 1) + 4 * b_sqr * (2 * _x + 3);
+                --_y;
+            }
+        }
+        delta = b_sqr * ((2 * _x + 1) * (2 * _x + 1)) +
+                4 * a_sqr * ((_y + 1) * (_y + 1)) - 4 * a_sqr * b_sqr; // Функция координат точки (x+1/2, y-1)
+        while (_y + 1 != 0) // Вторая часть дуги, если не выполняется условие первого цикла, значит выполняется a^2(2y - 1) <= 2b^2(x + 1)
+        {
+            pixelDrawer.setPixel(x + _x, y + _y, color);
+            pixelDrawer.setPixel(x + _x, y - _y, color);
+            pixelDrawer.setPixel(x - _x, y - _y, color);
+            pixelDrawer.setPixel(x - _x, y + _y, color);
+            if (delta < 0) // Переход по вертикали
+            {
+                --_y;
+                delta += 4 * a_sqr * (2 * _y + 3);
+            } else // Переход по диагонали
+            {
+                --_y;
+                delta = delta - 8 * b_sqr * (_x + 1) + 4 * a_sqr * (2 * _y + 3);
+                ++_x;
+            }
+        }
+         */
 
+       ///*
         double delta = Math.PI / 360;
-        if (deltaAngle > 0) {
-            for (double i = startAngle; i < startAngle + deltaAngle; i += delta) {
-                int curr_x = (int) (x + radius * Math.cos(i));
-                int curr_y = (int) (y + radius * Math.sin(i));
+        if (sweepAngle > 0) {
+            for (double i = startAngle; i < startAngle + sweepAngle; i += delta) {
+                int curr_x = (int) (x + radius - radius * Math.sin(i));
+                int curr_y = (int) (y + radius - radius * Math.cos(i));
                 pixelDrawer.setPixel(curr_x, curr_y, color);
             }
         } else {
-            for (double i = startAngle + deltaAngle; i < startAngle; i += delta) {
-                int curr_x = (int) (x + radius * Math.cos(i));
-                int curr_y = (int) (y + radius * Math.sin(i));
+            for (double i = startAngle + sweepAngle; i < startAngle; i += delta) {
+                int curr_x = (int) (x + radius - radius * Math.sin(i));
+                int curr_y = (int) (y + radius - radius * Math.cos(i));
                 pixelDrawer.setPixel(curr_x, curr_y, color);
             }
         }
+        //*/
     }
 
 /*

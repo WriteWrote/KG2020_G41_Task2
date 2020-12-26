@@ -230,7 +230,7 @@ public class TestArcs {
         Map<String, int[]> testCases = new HashMap<>();
         testCases.put("main", new int[]{50, 50, 0, 360, 10, 0, 360, 10});
         testCases.put("small", new int[]{50, 50, 0, 360, 10, 0, 11, 1});
-        //testCases.put("big", new int[]{50, 50, 0, 360, 10, 350, 361, 1});
+        testCases.put("big", new int[]{50, 50, 0, 360, 10, 350, 361, 1});
         testCases.put("sq", new int[]{50, 50, 0, 360, 90, 0, 360, 90});
         //testCases.put("ellipse_ver_main", new int[]{30, 70, 0, 360, 10, 0, 360, 10});
         //testCases.put("ellipse_hor_main", new int[]{70, 30, 0, 360, 10, 0, 360, 10});
